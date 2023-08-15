@@ -1,0 +1,188 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Tarefas</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        color: white;
+        background-color: #403c36;
+      }
+      .container {
+        border-radius: 30px;
+        background-color: #05968f;
+        width: 850px;
+        height: 800px;
+        border: solid white;
+        text-align: center;
+        margin: 0 auto;
+        margin-top: 50px;
+        overflow: auto;
+      }
+
+      .titulo {
+        font-size: 40px;
+        text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+          0px -4px 10px rgba(255, 255, 255, 0.3);
+        padding: 10px;
+      }
+
+      .adicione {
+        text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+          0px -4px 10px rgba(255, 255, 255, 0.3);
+        font-size: 20px;
+        color: white;
+      }
+
+      .form {
+        padding: 10px;
+      }
+
+      .titulo02 {
+        text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+          0px -4px 10px rgba(255, 255, 255, 0.3);
+        font-size: 20px;
+        padding: 20px;
+      }
+
+      .tabela {
+        color: white;
+      }
+
+      .tabeladiv {
+        background-color: #05968f;
+      }
+
+      .tabeladiv td {
+        padding: 20px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #577be6;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #6db7fc;
+      }
+
+      th {
+        color: rgb(0, 0, 0);
+        background-color: white;
+        width: 100px;
+        padding: 10px;
+      }
+
+      input[type="text"] {
+        padding: 4px 20px;
+        height: 35px;
+        border: 1px solid black;
+
+        width: 150px;
+        border-radius: 3px;
+        flex-grow: 1;
+      }
+
+      button {
+        border-radius: 10px;
+        width: 70px;
+        height: 20px;
+      }
+
+      .buttonadicionar {
+        padding: 4px 20px;
+        height: 35px;
+        border: 1px solid black;
+
+        width: 120px;
+        border-radius: 50px;
+        flex-grow: 1;
+      }
+
+      .copyright {
+        position: absolute;
+        bottom: 0;
+        right: 0%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="titulo">Lista de Tarefas NodeJs</div>
+      <div class="adicionartarefa">
+        <span class="adicione">Adicone uma Tarefa</span>
+        <form action="/" method="post" class="form">
+          <input type="text" placeholder="Nome da tarefa" name="nomeTarefa" />
+          <input type="text" placeholder="Dia da tarefa" name="diaTarefa" />
+          <input type="text" placeholder="Local da Tarefa" name="localTarefa" />
+          <input type="text" placeholder="Prioridade" name="prioridadeTarefa" />
+          <button class="buttonadicionar" type="submit">Adicionar</button>
+        </form>
+      </div>
+      <div class="tarefas">
+        <div class="titulo02">Tarefas adicionadas:</div>
+        <div class="tabeladiv">
+          <table class="tabela">
+            <tr>
+              <th>Nome da Tarefa</th>
+              <th>Dia da Tarefa</th>
+              <th>Local da Tarefa</th>
+              <th>Prioridade</th>
+              <th>Status</th>
+              <th>Completar</th>
+              <th>Pendente</th>
+              <th>Deletar</th>
+            </tr>
+            <% data.forEach(element => { %>
+            <tr>
+              <td><%= element.nomeTarefa %></td>
+              <td><%= element.diaTarefa %></td>
+              <td><%= element.localTarefa %></td>
+
+              <td><%= element.prioridadeTarefa %></td>
+              <td><%= element.status %></td>
+              <td>
+                <form action="/completar" method="post">
+                  <input
+                    type="text"
+                    style="display: none"
+                    name="nomeTarefa"
+                    value="<%= element.nomeTarefa %>"
+                  />
+                  <button type="submit">Completar</button>
+                </form>
+              </td>
+              <td>
+                <form action="/pendente" method="post">
+                  <input
+                    type="text"
+                    style="display: none"
+                    name="nomeTarefa"
+                    value="<%= element.nomeTarefa %>"
+                  />
+                  <button type="submit">Pendente</button>
+                </form>
+              </td>
+              <td>
+                <form action="/deletar" method="post">
+                  <input
+                    type="text"
+                    style="display: none"
+                    name="nomeTarefa"
+                    value="<%= element.nomeTarefa %>"
+                  />
+                  <button type="submit">Deletar</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">Matheus Martins &copy; 2023</div>
+  </body>
+</html>
